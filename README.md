@@ -1,5 +1,7 @@
 # Automated Java Deployment Pipeline with Jenkins, SonarQube, Nexus, and Tomcat
 
+![architecture](Steps/project.png)
+
 ## Project Overview
 I recently completed a DevOps project where I successfully created a Jenkins pipeline to deploy a Java application on a Tomcat server. This pipeline integrates various tools:
 
