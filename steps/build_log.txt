@@ -1,0 +1,550 @@
+Started by user admin
+Obtained jenkins-pipeline/Jenkinsfile from git https://github.com/saurabhshende13/Test.git
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/lib/jenkins/workspace/CICD Tomcat Project
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/lib/jenkins/workspace/CICD Tomcat Project/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/saurabhshende13/Test.git # timeout=10
+Fetching upstream changes from https://github.com/saurabhshende13/Test.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.34.1'
+ > git fetch --tags --force --progress -- https://github.com/saurabhshende13/Test.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+Checking out Revision a83e95c94f63f5021e8d8f25db862d418e22195d (refs/remotes/origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f a83e95c94f63f5021e8d8f25db862d418e22195d # timeout=10
+Commit message: "Update Jenkinsfile"
+ > git rev-list --no-walk a1435a23ae7dd1823a97407e6a6e08b18035f3ab # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] withCredentials
+Masking supported pattern matches of $SONARQUBE_TOKEN
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Checkout)
+[Pipeline] git
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/lib/jenkins/workspace/CICD Tomcat Project/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/saurabhshende13/Test.git # timeout=10
+Fetching upstream changes from https://github.com/saurabhshende13/Test.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.34.1'
+ > git fetch --tags --force --progress -- https://github.com/saurabhshende13/Test.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+Checking out Revision a83e95c94f63f5021e8d8f25db862d418e22195d (refs/remotes/origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f a83e95c94f63f5021e8d8f25db862d418e22195d # timeout=10
+ > git branch -a -v --no-abbrev # timeout=10
+ > git branch -D main # timeout=10
+ > git checkout -b main a83e95c94f63f5021e8d8f25db862d418e22195d # timeout=10
+Commit message: "Update Jenkinsfile"
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Build)
+[Pipeline] sh
++ mvn clean compile
+[[1;34mINFO[m] Scanning for projects...
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m------------------< [0;36mcom.example:ci-cd-tomcat-project[0;1m >------------------[m
+[[1;34mINFO[m] [1mBuilding ci-cd-tomcat-project 1.0-SNAPSHOT[m
+[[1;34mINFO[m] [1m--------------------------------[ war ]---------------------------------[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-clean-plugin:2.5:clean[m [1m(default-clean)[m @ [36mci-cd-tomcat-project[0;1m ---[m
+[[1;34mINFO[m] Deleting /var/lib/jenkins/workspace/CICD Tomcat Project/target
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-resources-plugin:2.6:resources[m [1m(default-resources)[m @ [36mci-cd-tomcat-project[0;1m ---[m
+[[1;33mWARNING[m] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[[1;34mINFO[m] skip non existing resourceDirectory /var/lib/jenkins/workspace/CICD Tomcat Project/src/main/resources
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-compiler-plugin:3.8.1:compile[m [1m(default-compile)[m @ [36mci-cd-tomcat-project[0;1m ---[m
+[[1;34mINFO[m] Changes detected - recompiling the module!
+[[1;33mWARNING[m] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!
+[[1;34mINFO[m] Compiling 1 source file to /var/lib/jenkins/workspace/CICD Tomcat Project/target/classes
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;34mINFO[m] [1;32mBUILD SUCCESS[m
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;34mINFO[m] Total time:  1.401 s
+[[1;34mINFO[m] Finished at: 2025-03-05T17:57:19Z
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (SonarQube Analysis)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] sh
++ mvn sonar:sonar -Dsonar.projectKey=java-app -Dsonar.host.url=http://54.160.35.37:9000 -Dsonar.login=****
+[[1;34mINFO[m] Scanning for projects...
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m------------------< [0;36mcom.example:ci-cd-tomcat-project[0;1m >------------------[m
+[[1;34mINFO[m] [1mBuilding ci-cd-tomcat-project 1.0-SNAPSHOT[m
+[[1;34mINFO[m] [1m--------------------------------[ war ]---------------------------------[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32msonar-maven-plugin:3.9.0.2155:sonar[m [1m(default-cli)[m @ [36mci-cd-tomcat-project[0;1m ---[m
+[[1;34mINFO[m] User cache: /var/lib/jenkins/.sonar/cache
+[[1;34mINFO[m] SonarQube version: 9.9.8.100196
+[[1;34mINFO[m] Default locale: "en", source code encoding: "UTF-8"
+[[1;34mINFO[m] Load global settings
+[[1;34mINFO[m] Load global settings (done) | time=103ms
+[[1;34mINFO[m] Server id: 147B411E-AZVlDE3zuVPuLarb5bP6
+[[1;34mINFO[m] User cache: /var/lib/jenkins/.sonar/cache
+[[1;34mINFO[m] Load/download plugins
+[[1;34mINFO[m] Load plugins index
+[[1;34mINFO[m] Load plugins index (done) | time=51ms
+[[1;34mINFO[m] Load/download plugins (done) | time=128ms
+[[1;34mINFO[m] Process project properties
+[[1;34mINFO[m] Process project properties (done) | time=14ms
+[[1;34mINFO[m] Execute project builders
+[[1;34mINFO[m] Execute project builders (done) | time=3ms
+[[1;34mINFO[m] Project key: java-app
+[[1;34mINFO[m] Base dir: /var/lib/jenkins/workspace/CICD Tomcat Project
+[[1;34mINFO[m] Working dir: /var/lib/jenkins/workspace/CICD Tomcat Project/target/sonar
+[[1;34mINFO[m] Load project settings for component key: 'java-app'
+[[1;34mINFO[m] Load project settings for component key: 'java-app' (done) | time=20ms
+[[1;34mINFO[m] Auto-configuring with CI 'Jenkins'
+[[1;34mINFO[m] Load quality profiles
+[[1;34mINFO[m] Load quality profiles (done) | time=44ms
+[[1;34mINFO[m] Load active rules
+[[1;34mINFO[m] Load active rules (done) | time=1227ms
+[[1;34mINFO[m] Load analysis cache
+[[1;34mINFO[m] Load analysis cache (119 bytes) | time=12ms
+[[1;34mINFO[m] Load project repositories
+[[1;34mINFO[m] Load project repositories (done) | time=21ms
+[[1;34mINFO[m] Indexing files...
+[[1;34mINFO[m] Project configuration:
+[[1;34mINFO[m] 2 files indexed
+[[1;34mINFO[m] 0 files ignored because of scm ignore settings
+[[1;34mINFO[m] Quality profile for java: Sonar way
+[[1;34mINFO[m] ------------- Run sensors on module CI/CD Tomcat Project
+[[1;34mINFO[m] Load metrics repository
+[[1;34mINFO[m] Load metrics repository (done) | time=21ms
+[[1;34mINFO[m] Sensor JavaSensor [java]
+[[1;34mINFO[m] Configured Java source version (sonar.java.source): 17
+[[1;34mINFO[m] JavaClasspath initialization
+[[1;34mINFO[m] JavaClasspath initialization (done) | time=2ms
+[[1;34mINFO[m] JavaTestClasspath initialization
+[[1;34mINFO[m] JavaTestClasspath initialization (done) | time=2ms
+[[1;34mINFO[m] Server-side caching is enabled. The Java analyzer will not try to leverage data from a previous analysis.
+[[1;34mINFO[m] Using ECJ batch to parse 1 Main java source files with batch size 51 KB.
+[[1;34mINFO[m] Starting batch processing.
+[[1;34mINFO[m] The Java analyzer cannot skip unchanged files in this context. A full analysis is performed for all files.
+[[1;34mINFO[m] 100% analyzed
+[[1;34mINFO[m] Batch processing: Done.
+[[1;34mINFO[m] Did not optimize analysis for any files, performed a full analysis for all 1 files.
+[[1;34mINFO[m] Using ECJ batch to parse 1 Test java source files with batch size 51 KB.
+[[1;34mINFO[m] Starting batch processing.
+[[1;34mINFO[m] 100% analyzed
+[[1;34mINFO[m] Batch processing: Done.
+[[1;34mINFO[m] Did not optimize analysis for any files, performed a full analysis for all 1 files.
+[[1;34mINFO[m] No "Generated" source files to scan.
+[[1;34mINFO[m] Sensor JavaSensor [java] (done) | time=1064ms
+[[1;34mINFO[m] Sensor JaCoCo XML Report Importer [jacoco]
+[[1;34mINFO[m] 'sonar.coverage.jacoco.xmlReportPaths' is not defined. Using default locations: target/site/jacoco/jacoco.xml,target/site/jacoco-it/jacoco.xml,build/reports/jacoco/test/jacocoTestReport.xml
+[[1;34mINFO[m] No report imported, no coverage information will be imported by JaCoCo XML Report Importer
+[[1;34mINFO[m] Sensor JaCoCo XML Report Importer [jacoco] (done) | time=3ms
+[[1;34mINFO[m] Sensor CSS Rules [javascript]
+[[1;34mINFO[m] No CSS, PHP, HTML or VueJS files are found in the project. CSS analysis is skipped.
+[[1;34mINFO[m] Sensor CSS Rules [javascript] (done) | time=0ms
+[[1;34mINFO[m] Sensor C# Project Type Information [csharp]
+[[1;34mINFO[m] Sensor C# Project Type Information [csharp] (done) | time=1ms
+[[1;34mINFO[m] Sensor C# Analysis Log [csharp]
+[[1;34mINFO[m] Sensor C# Analysis Log [csharp] (done) | time=9ms
+[[1;34mINFO[m] Sensor C# Properties [csharp]
+[[1;34mINFO[m] Sensor C# Properties [csharp] (done) | time=0ms
+[[1;34mINFO[m] Sensor SurefireSensor [java]
+[[1;34mINFO[m] parsing [/var/lib/jenkins/workspace/CICD Tomcat Project/target/surefire-reports]
+[[1;34mINFO[m] Sensor SurefireSensor [java] (done) | time=2ms
+[[1;34mINFO[m] Sensor HTML [web]
+[[1;34mINFO[m] Sensor HTML [web] (done) | time=2ms
+[[1;34mINFO[m] Sensor TextAndSecretsSensor [text]
+[[1;34mINFO[m] 2 source files to be analyzed
+[[1;34mINFO[m] 2/2 source files have been analyzed
+[[1;34mINFO[m] Sensor TextAndSecretsSensor [text] (done) | time=35ms
+[[1;34mINFO[m] Sensor VB.NET Project Type Information [vbnet]
+[[1;34mINFO[m] Sensor VB.NET Project Type Information [vbnet] (done) | time=1ms
+[[1;34mINFO[m] Sensor VB.NET Analysis Log [vbnet]
+[[1;34mINFO[m] Sensor VB.NET Analysis Log [vbnet] (done) | time=14ms
+[[1;34mINFO[m] Sensor VB.NET Properties [vbnet]
+[[1;34mINFO[m] Sensor VB.NET Properties [vbnet] (done) | time=0ms
+[[1;34mINFO[m] Sensor IaC Docker Sensor [iac]
+[[1;34mINFO[m] 0 source files to be analyzed
+[[1;34mINFO[m] 0/0 source files have been analyzed
+[[1;34mINFO[m] Sensor IaC Docker Sensor [iac] (done) | time=70ms
+[[1;34mINFO[m] ------------- Run sensors on project
+[[1;34mINFO[m] Sensor Analysis Warnings import [csharp]
+[[1;34mINFO[m] Sensor Analysis Warnings import [csharp] (done) | time=1ms
+[[1;34mINFO[m] Sensor Zero Coverage Sensor
+[[1;34mINFO[m] Sensor Zero Coverage Sensor (done) | time=5ms
+[[1;34mINFO[m] Sensor Java CPD Block Indexer
+[[1;34mINFO[m] Sensor Java CPD Block Indexer (done) | time=12ms
+[[1;34mINFO[m] CPD Executor 1 file had no CPD blocks
+[[1;34mINFO[m] CPD Executor Calculating CPD for 0 files
+[[1;34mINFO[m] CPD Executor CPD calculation finished (done) | time=0ms
+[[1;34mINFO[m] Analysis report generated in 70ms, dir size=129.9 kB
+[[1;34mINFO[m] Analysis report compressed in 19ms, zip size=18.9 kB
+[[1;34mINFO[m] Analysis report uploaded in 33ms
+[[1;34mINFO[m] ANALYSIS SUCCESSFUL, you can find the results at: http://54.160.35.37:9000/dashboard?id=java-app
+[[1;34mINFO[m] Note that you will be able to access the updated dashboard once the server has processed the submitted analysis report
+[[1;34mINFO[m] More about the report processing at http://54.160.35.37:9000/api/ce/task?id=AZVndJUnuVPuLarb5lJs
+[[1;34mINFO[m] Analysis total time: 5.426 s
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;34mINFO[m] [1;32mBUILD SUCCESS[m
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;34mINFO[m] Total time:  7.080 s
+[[1;34mINFO[m] Finished at: 2025-03-05T17:57:28Z
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Package)
+[Pipeline] sh
++ mvn package -DskipTests
+[[1;34mINFO[m] Scanning for projects...
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m------------------< [0;36mcom.example:ci-cd-tomcat-project[0;1m >------------------[m
+[[1;34mINFO[m] [1mBuilding ci-cd-tomcat-project 1.0-SNAPSHOT[m
+[[1;34mINFO[m] [1m--------------------------------[ war ]---------------------------------[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-resources-plugin:2.6:resources[m [1m(default-resources)[m @ [36mci-cd-tomcat-project[0;1m ---[m
+[[1;33mWARNING[m] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[[1;34mINFO[m] skip non existing resourceDirectory /var/lib/jenkins/workspace/CICD Tomcat Project/src/main/resources
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-compiler-plugin:3.8.1:compile[m [1m(default-compile)[m @ [36mci-cd-tomcat-project[0;1m ---[m
+[[1;34mINFO[m] Nothing to compile - all classes are up to date
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-resources-plugin:2.6:testResources[m [1m(default-testResources)[m @ [36mci-cd-tomcat-project[0;1m ---[m
+[[1;33mWARNING[m] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[[1;34mINFO[m] skip non existing resourceDirectory /var/lib/jenkins/workspace/CICD Tomcat Project/src/test/resources
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-compiler-plugin:3.8.1:testCompile[m [1m(default-testCompile)[m @ [36mci-cd-tomcat-project[0;1m ---[m
+[[1;34mINFO[m] Changes detected - recompiling the module!
+[[1;33mWARNING[m] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!
+[[1;34mINFO[m] Compiling 1 source file to /var/lib/jenkins/workspace/CICD Tomcat Project/target/test-classes
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-surefire-plugin:2.12.4:test[m [1m(default-test)[m @ [36mci-cd-tomcat-project[0;1m ---[m
+[[1;34mINFO[m] Tests are skipped.
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-war-plugin:3.3.1:war[m [1m(default-war)[m @ [36mci-cd-tomcat-project[0;1m ---[m
+[[1;34mINFO[m] Packaging webapp
+[[1;34mINFO[m] Assembling webapp [ci-cd-tomcat-project] in [/var/lib/jenkins/workspace/CICD Tomcat Project/target/ci-cd-tomcat-project-1.0-SNAPSHOT]
+[[1;34mINFO[m] Processing war project
+[[1;34mINFO[m] Copying webapp resources [/var/lib/jenkins/workspace/CICD Tomcat Project/src/main/webapp]
+[[1;34mINFO[m] Building war: /var/lib/jenkins/workspace/CICD Tomcat Project/target/ci-cd-tomcat-project-1.0-SNAPSHOT.war
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;34mINFO[m] [1;32mBUILD SUCCESS[m
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;34mINFO[m] Total time:  1.669 s
+[[1;34mINFO[m] Finished at: 2025-03-05T17:57:31Z
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Upload Artifact to Nexus)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] withCredentials
+Masking supported pattern matches of $NEXUS_PASS
+[Pipeline] {
+[Pipeline] sh
++ mvn deploy:deploy-file -DgroupId=com.example -DartifactId=ci-cd-tomcat-project -Dversion=1.0.6 -Dpackaging=war -Dfile=target/ci-cd-tomcat-project-1.0-SNAPSHOT.war -DrepositoryId=nexus -Durl=http://23.22.104.243:8081/repository/maven-releases/ -Dusername=admin -Dpassword=****
+[[1;34mINFO[m] Scanning for projects...
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m------------------< [0;36mcom.example:ci-cd-tomcat-project[0;1m >------------------[m
+[[1;34mINFO[m] [1mBuilding ci-cd-tomcat-project 1.0-SNAPSHOT[m
+[[1;34mINFO[m] [1m--------------------------------[ war ]---------------------------------[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-deploy-plugin:2.7:deploy-file[m [1m(default-cli)[m @ [36mci-cd-tomcat-project[0;1m ---[m
+Uploading to nexus: http://23.22.104.243:8081/repository/maven-releases/com/example/ci-cd-tomcat-project/1.0.6/ci-cd-tomcat-project-1.0.6.war
+Progress (1): 4.1/466 kB
+Progress (1): 8.2/466 kB
+Progress (1): 12/466 kB 
+Progress (1): 16/466 kB
+Progress (1): 20/466 kB
+Progress (1): 25/466 kB
+Progress (1): 29/466 kB
+Progress (1): 33/466 kB
+Progress (1): 37/466 kB
+Progress (1): 41/466 kB
+Progress (1): 45/466 kB
+Progress (1): 49/466 kB
+Progress (1): 53/466 kB
+Progress (1): 57/466 kB
+Progress (1): 61/466 kB
+Progress (1): 66/466 kB
+Progress (1): 70/466 kB
+Progress (1): 74/466 kB
+Progress (1): 78/466 kB
+Progress (1): 82/466 kB
+Progress (1): 86/466 kB
+Progress (1): 90/466 kB
+Progress (1): 94/466 kB
+Progress (1): 98/466 kB
+Progress (1): 102/466 kB
+Progress (1): 106/466 kB
+Progress (1): 111/466 kB
+Progress (1): 115/466 kB
+Progress (1): 119/466 kB
+Progress (1): 123/466 kB
+Progress (1): 127/466 kB
+Progress (1): 131/466 kB
+Progress (1): 135/466 kB
+Progress (1): 139/466 kB
+Progress (1): 143/466 kB
+Progress (1): 147/466 kB
+Progress (1): 152/466 kB
+Progress (1): 156/466 kB
+Progress (1): 160/466 kB
+Progress (1): 164/466 kB
+Progress (1): 168/466 kB
+Progress (1): 172/466 kB
+Progress (1): 176/466 kB
+Progress (1): 180/466 kB
+Progress (1): 184/466 kB
+Progress (1): 188/466 kB
+Progress (1): 193/466 kB
+Progress (1): 197/466 kB
+Progress (1): 201/466 kB
+Progress (1): 205/466 kB
+Progress (1): 209/466 kB
+Progress (1): 213/466 kB
+Progress (1): 217/466 kB
+Progress (1): 221/466 kB
+Progress (1): 225/466 kB
+Progress (1): 229/466 kB
+Progress (1): 233/466 kB
+Progress (1): 238/466 kB
+Progress (1): 242/466 kB
+Progress (1): 246/466 kB
+Progress (1): 250/466 kB
+Progress (1): 254/466 kB
+Progress (1): 258/466 kB
+Progress (1): 262/466 kB
+Progress (1): 266/466 kB
+Progress (1): 270/466 kB
+Progress (1): 274/466 kB
+Progress (1): 279/466 kB
+Progress (1): 283/466 kB
+Progress (1): 287/466 kB
+Progress (1): 291/466 kB
+Progress (1): 295/466 kB
+Progress (1): 299/466 kB
+Progress (1): 303/466 kB
+Progress (1): 307/466 kB
+Progress (1): 311/466 kB
+Progress (1): 315/466 kB
+Progress (1): 319/466 kB
+Progress (1): 324/466 kB
+Progress (1): 328/466 kB
+Progress (1): 332/466 kB
+Progress (1): 336/466 kB
+Progress (1): 340/466 kB
+Progress (1): 344/466 kB
+Progress (1): 348/466 kB
+Progress (1): 352/466 kB
+Progress (1): 356/466 kB
+Progress (1): 360/466 kB
+Progress (1): 365/466 kB
+Progress (1): 369/466 kB
+Progress (1): 373/466 kB
+Progress (1): 377/466 kB
+Progress (1): 381/466 kB
+Progress (1): 385/466 kB
+Progress (1): 389/466 kB
+Progress (1): 393/466 kB
+Progress (1): 397/466 kB
+Progress (1): 401/466 kB
+Progress (1): 406/466 kB
+Progress (1): 410/466 kB
+Progress (1): 414/466 kB
+Progress (1): 418/466 kB
+Progress (1): 422/466 kB
+Progress (1): 426/466 kB
+Progress (1): 430/466 kB
+Progress (1): 434/466 kB
+Progress (1): 438/466 kB
+Progress (1): 442/466 kB
+Progress (1): 446/466 kB
+Progress (1): 451/466 kB
+Progress (1): 455/466 kB
+Progress (1): 459/466 kB
+Progress (1): 463/466 kB
+Progress (1): 466 kB    
+                    
+Uploaded to nexus: http://23.22.104.243:8081/repository/maven-releases/com/example/ci-cd-tomcat-project/1.0.6/ci-cd-tomcat-project-1.0.6.war (466 kB at 2.7 MB/s)
+Uploading to nexus: http://23.22.104.243:8081/repository/maven-releases/com/example/ci-cd-tomcat-project/1.0.6/ci-cd-tomcat-project-1.0.6.pom
+Progress (1): 434 B
+                   
+Uploaded to nexus: http://23.22.104.243:8081/repository/maven-releases/com/example/ci-cd-tomcat-project/1.0.6/ci-cd-tomcat-project-1.0.6.pom (434 B at 9.6 kB/s)
+Downloading from nexus: http://23.22.104.243:8081/repository/maven-releases/com/example/ci-cd-tomcat-project/maven-metadata.xml
+Progress (1): 464 B
+                   
+Downloaded from nexus: http://23.22.104.243:8081/repository/maven-releases/com/example/ci-cd-tomcat-project/maven-metadata.xml (464 B at 21 kB/s)
+Uploading to nexus: http://23.22.104.243:8081/repository/maven-releases/com/example/ci-cd-tomcat-project/maven-metadata.xml
+Progress (1): 495 B
+                   
+Uploaded to nexus: http://23.22.104.243:8081/repository/maven-releases/com/example/ci-cd-tomcat-project/maven-metadata.xml (495 B at 10 kB/s)
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;34mINFO[m] [1;32mBUILD SUCCESS[m
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;34mINFO[m] Total time:  1.023 s
+[[1;34mINFO[m] Finished at: 2025-03-05T17:57:34Z
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[Pipeline] }
+[Pipeline] // withCredentials
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Deploy to Tomcat)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] withCredentials
+Masking supported pattern matches of $TOMCAT_PASS
+[Pipeline] {
+[Pipeline] sh
++ update=true
++ curl -v -u admin:**** -T target/ci-cd-tomcat-project-1.0-SNAPSHOT.war http://54.234.205.18:8080/manager/text/deploy?path=/ci-cd-tomcat-project
+*   Trying 54.234.205.18:8080...
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0* Connected to 54.234.205.18 (54.234.205.18) port 8080 (#0)
+* Server auth using Basic with user 'admin'
+> PUT /manager/text/deploy?path=/ci-cd-tomcat-project HTTP/1.1
+> Host: 54.234.205.18:8080
+> Authorization: Basic YWRtaW46****
+> User-Agent: curl/7.81.0
+> Accept: */*
+> Content-Length: 465899
+> Expect: 100-continue
+> 
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 403 
+< Cache-Control: private
+< Content-Type: text/html;charset=UTF-8
+< Content-Length: 3446
+< Date: Wed, 05 Mar 2025 17:57:34 GMT
+< Connection: close
+< 
+{ [3446 bytes data]
+
+  0  458k  100  3446    0     0   983k      0 --:--:-- --:--:-- --:--:-- 1121k
+* Closing connection 0
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+ <head>
+  <title>403 Access Denied</title>
+  <style type="text/css">
+    <!--
+    BODY {font-family:Tahoma,Arial,sans-serif;color:black;background-color:white;font-size:12px;}
+    H1 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:22px;}
+    PRE, TT {border: 1px dotted #525D76}
+    A {color : black;}A.name {color : black;}
+    -->
+  </style>
+ </head>
+ <body>
+   <h1>403 Access Denied</h1>
+   <p>
+    You are not authorized to view this page.
+   </p>
+   <p>
+    By default the Manager is only accessible from a browser running on the
+    same machine as Tomcat. If you wish to modify this restriction, you'll need
+    to edit the Manager's <tt>context.xml</tt> file.
+   </p>
+   <p>
+    If you have already configured the Manager application to allow access and
+    you have used your browsers back button, used a saved book-mark or similar
+    then you may have triggered the cross-site request forgery (CSRF) protection
+    that has been enabled for the HTML interface of the Manager application. You
+    will need to reset this protection by returning to the
+    <a href="/manager/html">main Manager page</a>. Once you
+    return to this page, you will be able to continue using the Manager
+    application's HTML interface normally. If you continue to see this access
+    denied message, check that you have the necessary permissions to access this
+    application.
+   </p>
+   <p>
+    If you have not changed
+    any configuration files, please examine the file
+    <tt>conf/tomcat-users.xml</tt> in your installation. That
+    file must contain the credentials to let you use this webapp.
+   </p>
+   <p>
+    For example, to add the <tt>manager-gui</tt> role to a user named
+    <tt>tomcat</tt> with a password of <tt>s3cret</tt>, add the following to the
+    config file listed above.
+   </p>
+<pre>
+&lt;role rolename="manager-gui"/&gt;
+&lt;user username="tomcat" password="s3cret" roles="manager-gui"/&gt;
+</pre>
+   <p>
+    Note that for Tomcat 7 onwards, the roles required to use the manager
+    application were changed from the single <tt>manager</tt> role to the
+    following four roles. You will need to assign the role(s) required for
+    the functionality you wish to access.
+   </p>
+    <ul>
+      <li><tt>manager-gui</tt> - allows access to the HTML GUI and the status
+          pages</li>
+      <li><tt>manager-script</tt> - allows access to the text interface and the
+          status pages</li>
+      <li><tt>manager-jmx</tt> - allows access to the JMX proxy and the status
+          pages</li>
+      <li><tt>manager-status</tt> - allows access to the status pages only</li>
+    </ul>
+   <p>
+    The HTML interface is protected against CSRF but the text and JMX interfaces
+    are not. To maintain the CSRF protection:
+   </p>
+   <ul>
+    <li>Users with the <tt>manager-gui</tt> role should not be granted either
+        the <tt>manager-script</tt> or <tt>manager-jmx</tt> roles.</li>
+    <li>If the text or jmx interfaces are accessed through a browser (e.g. for
+        testing since these interfaces are intended for tools not humans) then
+        the browser must be closed afterwards to terminate the session.</li>
+   </ul>
+   <p>
+    For more information - please see the
+    <a href="/docs/manager-howto.html" rel="noopener noreferrer">Manager App How-To</a>.
+   </p>
+ </body>
+
+</html>
+[Pipeline] }
+[Pipeline] // withCredentials
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // withCredentials
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
