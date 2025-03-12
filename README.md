@@ -67,7 +67,7 @@ sudo apt install tomcat9 tomcat9-admin tomcat9-common -y
 sudo systemctl start tomcat9
 sudo systemctl enable tomcat9
 ```
-
+![Step1a](steps/Step1a.png)
 ---
 
 ### Step 2: Access Jenkins and Initial Setup
@@ -77,13 +77,21 @@ sudo systemctl enable tomcat9
    ```
 2. Install suggested plugins after signing in.
 
+![Step2a](steps/Step2a.png)
+
 ### Step 3: Verify Tool Access
 - **SonarQube:** `http://<server-ip>:9000`
   - Username: `admin`
   - Password: `admin`
+  - 
+![Step3a](steps/Step3a.png)
+
 - **Nexus Repository:** `http://<server-ip>:8081`
   - Username: `admin`
   - Password: `admin123`
+
+![Step3b](steps/Step3b.png)
+
 - **Tomcat Server:**
   - Update users and roles in `/etc/tomcat9/tomcat-users.xml`
 
@@ -104,7 +112,7 @@ Restart Tomcat:
 ```bash
 sudo systemctl restart tomcat9
 ```
-
+![Step3c](steps/Step3c.png)
 ---
 
 ### Step 4: Install Required Jenkins Plugins
@@ -114,19 +122,41 @@ sudo systemctl restart tomcat9
 - Nexus Artifact Uploader
 - Deploy to Container
 
+![Step4a](steps/Step4a.png)
+
 ### Step 5: Add Credentials in Jenkins
 - **SonarQube:** Generate a token and add it as **Secret Text** in Jenkins.
+
+![Step5a](steps/Step5a.png)
+
+![Step5b](steps/Step5b.png)
+
 - **Nexus & Tomcat:** Add username/password in Jenkins global credentials.
+
+![Step5c](steps/Step5c.png)
 
 ### Step 6: Configure Jenkins Pipeline
 1. Create a new Jenkins job.
 2. Select **Pipeline** as the job type.
-3. Configure **Pipeline Script from SCM** and specify the repository.
-4. Assign the `Jenkinsfile` path.
-5. Save and trigger the build.
+
+![Step6a](steps/Step6a.png)
+
+4. Configure **Pipeline Script from SCM** and specify the repository.
+
+![Step6b](steps/Step6b.png)
+
+6. Assign the `Jenkinsfile` path.
+
+![Step6c](steps/Step6c.png)
+
+8. Save and trigger the build.
+
+![Step6d](steps/Step6d.png)
 
 ### Step 7: Verify Build Success
 Monitor Jenkins logs to ensure the build passes.
+
+![Step7a](steps/Step7a.png)
 
 ### Step 8: Pipeline Overview
 The pipeline automates:
@@ -135,12 +165,23 @@ The pipeline automates:
 - **Artifact Upload to Nexus**
 - **Deployment to Tomcat Server**
 
+![Step8a](steps/Step8a.png)
+
 ### Step 9: Final Verification
 After the pipeline executes, verify:
 - **SonarQube Analysis Results**
+
+![Step9a](steps/Step9a.png)
+
 - **Artifact in Nexus Repository**
+
+![Step9b](steps/Step9b.png)
+
 - **Successful Deployment in Tomcat**
 
+![Step9c](steps/Step9c.png)
+
+![Step9d](steps/Step9d.png)
 ---
 
 ## Conclusion
