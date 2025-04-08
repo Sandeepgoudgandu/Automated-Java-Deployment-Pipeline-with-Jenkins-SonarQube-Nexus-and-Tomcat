@@ -52,10 +52,12 @@ sudo docker run -itd --name sonarqube -p 9000:9000 sonarqube:lts
 ```bash
 #!/bin/bash
 sudo apt update -y
-wget https://download.sonatype.com/nexus/3/latest-unix.tar.gz
-tar -xvf latest-unix.tar.gz
-mv nexus-* /opt/nexus
-/opt/nexus/bin/nexus start
+sudo apt install openjdk-8-jdk -y
+cd /opt
+sudo wget https://sonatype-download.global.ssl.fastly.net/repository/downloads-prod-group/3/nexus-unix-x86-64-3.78.0-14.tar.gz
+sudo tar -xvf nexus-*.tar.gz
+sudo mv nexus-3.78.0-14 nexus
+sudo /opt/nexus/bin/nexus start
 ```
 
 #### 4. Install Tomcat Server
