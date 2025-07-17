@@ -2,12 +2,12 @@ pipeline {
     agent any
 
     environment {
-        SONARQUBE_URL = 'http://54.160.35.37:9000'
+        SONARQUBE_URL = 'http://3.110.186.172:9000'
         SONARQUBE_TOKEN = credentials('sonarqube-token') // Store this in Jenkins credentials
-        NEXUS_URL = 'http://23.22.104.243:8081'  // Update with your Nexus server URL
+        NEXUS_URL = 'http://13.232.115.199:8081'  // Update with your Nexus server URL
         NEXUS_REPO = 'maven-releases'  // Update with your Nexus repository name
         NEXUS_CREDENTIALS_ID = 'nexus-credentials' // Store Nexus username/password in Jenkins credentials
-        TOMCAT_URL = 'http://54.234.205.18:8080' // Update with your Tomcat server URL
+        TOMCAT_URL = 'http://65.0.104.129:8080' // Update with your Tomcat server URL
         TOMCAT_CREDENTIALS_ID = 'tomcat-credentials' // Store Tomcat username/password in Jenkins credentials
     }
 
