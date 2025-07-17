@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+      tools {
+  git 'DefaultGit'
+   }
+
     environment {
         SONARQUBE_URL = 'http://3.110.186.172:9000'
         SONARQUBE_TOKEN = credentials('sonarqube-token') // Store this in Jenkins credentials
