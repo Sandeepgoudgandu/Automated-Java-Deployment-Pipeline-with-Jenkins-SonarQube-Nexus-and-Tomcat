@@ -21,10 +21,6 @@
         <sonar.language>java</sonar.language>
     </properties>
 
-       <properties>
-         <sonar.tests>none</sonar.tests>
-      </properties>
-  
     <dependencies>
         <dependency>
             <groupId>jakarta.servlet</groupId>
