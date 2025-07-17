@@ -14,7 +14,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/saurabhshende13/Automated-Java-Deployment-Pipeline-with-Jenkins-SonarQube-Nexus-and-Tomcat.git'
+                git branch: 'main', url: 'https://github.com/Sandeepgoudgandu/Automated-Java-Deployment-Pipeline-with-Jenkins-SonarQube-Nexus-and-Tomcat.git'
             }
         }
 
